@@ -9,9 +9,6 @@ import glob
 from itertools import chain
 
 
-ACCESS_KEY = 'ASIATZR3WOO5YI4MNKVW'
-SECRET_KEY = 'bWGYREVeOv2bM5WAX5LAWOff8yeYvmsJFfjk1HF9'
-
 def upload_to_aws(local_file, bucket, s3_file):
     #s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
     s3 = boto3.resource('s3')
@@ -71,26 +68,12 @@ if __name__ == "__main__":
     processed = []
     chunk_size = 50000
     machine = 0
-    file_count = 4
-    song_count = 0
-    #get_all_paths('msd/data')
-    #assert 0 == 1
+    file_count = 0
     paths = ['msd/data/C', 'msd/data/D', 'msd/data/E', 'msd/data/F', 'msd/data/G', 'msd/data/H']
     for root, dirs, files in chain.from_iterable(os.walk(path) for path in paths):#os.walk('msd/data'):
-        #print(root, dirs, files)
-        #files = glob.glob(os.path.join(root, '*.h5'))
-        #print(files)
         for f in files:
-            #print(f)
-            #song_count += 1
-            #processed.append(os.path.join(root, f))
-            #if song_count > 950000:
-                #print('resume', flush=True)
             processed.append(os.path.join(root, f))
-            #print(os.path.join(root, f))
-            #processed.append(files)
             if len(processed) % chunk_size == 0:
-                #print('Chunk:', file_count)
                 file_name = 'data_' + str(file_count) + '_m' + str(machine) + '.csv'
                 paths_to_file(processed, file_name)
                 print('Chunk {0} read finished'.format(file_count), flush=True)
