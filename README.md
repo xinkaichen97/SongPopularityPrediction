@@ -1,4 +1,4 @@
-# SongPopularityPrediction
+# Song Popularity Prediction
 Prediction of song hotness on the Million Songs Dataset
 
 * Used AWS EC2 to process the data and send to S3
